@@ -10,7 +10,7 @@ class CustomBGDRegressor:
         self.cost_history = []
 
     def fit(self, X, y):
-        """Trains the model using Batch Gradient Descent and MSE loss."""
+       
         n_samples, n_features = X.shape
         self.weights = np.zeros(n_features)
         self.bias = 0.0
@@ -33,5 +33,5 @@ class CustomBGDRegressor:
         return self
 
     def predict(self, X):
-        """Makes predictions on new data vectors."""
+       
         return np.dot(X, self.weights) + self.bias

@@ -10,19 +10,18 @@ class DataCleaner:
         self.df = None
 
     def load_data(self):
-        """Loads raw CSV data and drops identifiers and leaky targets."""
+       
         if not os.path.exists(self.filepath):
             raise FileNotFoundError(f"Could not find dataset at: {self.filepath}")
             
         self.df = pd.read_csv(self.filepath)
         
-        # 1. Drop the useless ID column (pure noise)
+        
         if 'CustomerID' in self.df.columns:
             self.df = self.df.drop('CustomerID', axis=1)
             print("[*] Dropped 'CustomerID' (noise identifier).")
             
-        # 2. Prevent Target Leakage 
-        # (Dropping alternative success metrics so the model doesn't cheat during training)
+        
         leakage_columns = ['ConversionRate', 'ClickThroughRate']
         for col in leakage_columns:
             if col in self.df.columns:
@@ -33,7 +32,7 @@ class DataCleaner:
         return self
 
     def clean_missing_values(self):
-        """Fills missing numerical values with the median and categorical with the mode."""
+       
         # Clean numerical columns
         num_cols = self.df.select_dtypes(include=[np.number]).columns
         for col in num_cols:
@@ -50,7 +49,7 @@ class DataCleaner:
         return self
 
     def encode_categorical_data(self):
-        """Converts text columns (like CampaignChannel) into numbers for NumPy math."""
+        
         encoder = LabelEncoder()
         cat_cols = self.df.select_dtypes(include=[object]).columns
         
@@ -61,10 +60,10 @@ class DataCleaner:
         return self
 
     def get_cleaned_data(self):
-        """Returns the fully cleaned DataFrame ready for PCA and Regression."""
+        
         return self.df
 
-# --- Quick Test to see if it works ---
+
 if __name__ == "__main__":
     file_path = r"c:\Users\hardi\OneDrive\Pictures\Desktop\optiasset\data\raw_marketing_data.csv"
     cleaner = DataCleaner(filepath=file_path)

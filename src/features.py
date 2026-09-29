@@ -12,7 +12,7 @@ class FeatureProcessor:
         self.pca_model = None
 
     def extract_and_scale_features(self, feature_cols):
-        """Extracts input features (X) and target (y), then standardizes them."""
+        
         valid_cols = [col for col in feature_cols if col in self.df.columns]
         
         if len(valid_cols) == 0:
@@ -26,7 +26,7 @@ class FeatureProcessor:
         return X_scaled, y
 
     def apply_pca(self, X_scaled, n_components=3):
-        """Applies Principal Component Analysis for dimensionality reduction."""
+        
         self.pca_model = PCA(n_components=n_components)
         X_pca = self.pca_model.fit_transform(X_scaled)
         

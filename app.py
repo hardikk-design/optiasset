@@ -61,7 +61,7 @@ if not os.path.exists(DEFAULT_DATA_PATH):
 else:
     df_clean = load_and_clean_data(DEFAULT_DATA_PATH)
 
-    # --- VIEW 1: DATA OVERVIEW & CLEANING ---
+    #1: DATA OVERVIEW & CLEANING
     if app_mode == "1. Data Overview & Cleaning":
         st.header("Step 1: Raw Data Ingestion & Automated Cleaning")
         
@@ -80,7 +80,7 @@ else:
             use_container_width=True
         )
 
-    # --- VIEW 2: PCA & FEATURE ENGINEERING ---
+    #2: PCA & FEATURE ENGINEERING
     elif app_mode == "2. PCA & Feature Engineering":
         st.header("Step 2: Dimensionality Reduction via Principal Component Analysis (PCA)")
         
@@ -107,7 +107,7 @@ else:
             fig = px.scatter(pca_df, x='PC1', y='PC2', color='Target', opacity=0.7, title="PCA Component Space")
             st.plotly_chart(fig, use_container_width=True)
 
-    # --- VIEW 3: CTR PREDICTION & RECOMMENDATIONS ---
+    #3: CTR PREDICTION & RECOMMENDATIONS
     elif app_mode == "3. CTR Prediction & Recommendations":
         st.header("Step 3: Custom Gradient Descent Prediction & KNN Recommender")
         
